@@ -119,6 +119,7 @@
 }
 
 /* Frequency Section */
+/* Frequency Section */
 .frequency {
   margin-top: -100px;
   position: relative;
@@ -131,16 +132,17 @@
   padding: 20px;
   box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
   border: solid 1px rgba(255, 255, 255, 0.3);
-  overflow: hidden; /* Cache la barre de défilement native */
   height: 100px;
 }
 
 .scroll-wrapper {
   overflow-x: auto;
-  padding-bottom: 15px; /* Espace pour la barre de défilement */
-  scrollbar-width: thin; /* Pour Firefox */
-  scrollbar-color: #D9E8D8 transparent; /* Pour Firefox */
-  -webkit-overflow-scrolling: touch; /* Smooth scrolling sur iOS */
+  overflow-y: hidden;
+  padding-bottom: 15px;
+  scrollbar-width: thin;
+  scrollbar-color: #D9E8D8 transparent;
+  -webkit-overflow-scrolling: touch;
+  height: 100%;
 }
 
 /* Style de la barre de défilement pour Chrome/Safari */
@@ -164,8 +166,8 @@
   padding: 10px 5px;
   width: max-content;
   min-width: 100%;
-  margin: 0; /* Supprime les marges par défaut */
-  -webkit-overflow-scrolling: touch; /* Scroll fluide sur iOS */
+  margin: 0;
+  -webkit-overflow-scrolling: touch;
 }
 
 .frequency-list li {
@@ -179,11 +181,14 @@
   font-size: clamp(14px, 2vw, 16px);
   white-space: nowrap;
   flex-shrink: 0;
-  margin: 5px 0; /* Marge uniforme */
-  user-select: none; /* Empêche la sélection de texte */
+  margin: 5px 0;
+  user-select: none;
+  /* Correction pour les clics sur mobile */
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
 }
 
-.frequency-list li:active { /* Effet "appuyé" sur mobile */
+.frequency-list li:active {
   transform: scale(0.98);
 }
 
@@ -196,46 +201,56 @@
 @media (max-width: 768px) {
   .frequency {
     margin-top: -50px;
-    position: relative;
-    z-index: 10;
   }
 
   .frequency .container {
     border-radius: 30px 30px 0 0;
-    padding: 15px 5px; /* Réduit l'espace vertical */
-    overflow-x: auto;
-    overflow-y: hidden; /* Cache la barre verticale */
-    height: auto; /* Hauteur automatique */
-    display: block;
-    -ms-overflow-style: none; /* IE et Edge */
-    scrollbar-width: none; /* Firefox */
-    height: 110px;
+    padding: 15px 10px;
+    height: 100px; /* Hauteur fixe plus petite */
+    overflow: hidden; /* Important : cache tout débordement */
   }
 
-  .frequency .container::-webkit-scrollbar {
-    display: none; /* Chrome, Safari, Opera */
+  .scroll-wrapper {
+    overflow-x: auto;
+    overflow-y: hidden;
+    height: auto;
+    padding-bottom: 0;
+    /* Cache complètement les barres de défilement sur mobile */
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+
+  .scroll-wrapper::-webkit-scrollbar {
+    display: none;
   }
 
   .frequency-list {
     gap: 10px;
-    padding: 5px 15px; /* Padding latéral pour le scroll */
-    display: inline-flex; /* Meilleur comportement en flex */
+    padding: 5px 15px;
+    display: flex;
+    align-items: center;
+    /*height: 1px; !* Hauteur fixe pour éviter le débordement vertical *!*/
+    /* Amélioration du scroll tactile */
+    scroll-snap-type: x mandatory;
+    /*background: #094596;*/
   }
 
   .frequency-list li {
     padding: 10px 20px;
     font-size: 14px;
-    margin-bottom: 0; /* Supprime la marge négative */
-    box-shadow: 0 2px 5px rgba(0,0,0,0.1); /* Meilleur feedback visuel */
-  }
-
-  /* Amélioration du scroll tactile */
-  .frequency-list {
-    scroll-snap-type: x mandatory;
-  }
-
-  .frequency-list li {
+    margin: 0; /* Supprime toutes les marges */
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    flex-shrink: 0;
     scroll-snap-align: start;
+    /* Améliore la réactivité tactile */
+    touch-action: manipulation;
+    -webkit-tap-highlight-color: rgba(253, 209, 104, 0.3);
+  }
+
+  /* Effet visuel amélioré pour le touch */
+  .frequency-list li:active {
+    background: linear-gradient(135deg, #FED168 0%, #F5F4F3 100%);
+    transform: scale(0.95);
   }
 }
 /* Services Section */
