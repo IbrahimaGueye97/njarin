@@ -3,9 +3,6 @@ import {NgForOf, NgIf} from '@angular/common';
 import {Router} from '@angular/router';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import {
-  ServicesComponentComponent
-} from '../../artisans-depanneurs-services/services-component/services-component.component';
 import {SharedService} from '../../shared/shared.service';
 
 export enum Artisans {
@@ -115,14 +112,14 @@ export class HomeComponentComponent implements OnInit {
 
   ngOnInit(): void {
     // Attendre que le DOM soit complètement chargé
-    this.initScrollEffects();
+    setTimeout(() => {
 
-    // setTimeout(() => {
+    this.initScrollEffects();
 
       this.initAnimations();
       this.initCounters();
 
-    // }, 300);
+    }, 100);
 
   }
 
@@ -165,7 +162,7 @@ export class HomeComponentComponent implements OnInit {
         const heroTl = gsap.timeline();
         heroTl
           .fromTo(heroTitle,
-            { opacity: 0, y: 50 },
+            { opacity: 0, y: 70 },
             { opacity: 1, y: 0, duration: 1.2, ease: 'power3.out' }
           )
           .fromTo(heroText,
@@ -181,21 +178,38 @@ export class HomeComponentComponent implements OnInit {
       }
 
       // Animation des cartes de service avec ScrollTrigger
-      const cards = document.querySelectorAll('.service-card');
-      if (cards.length > 0) {
+      const cards = document.querySelectorAll('.service-card');if (cards.length > 0) {
         cards.forEach((card, index) => {
-          gsap.set(card, { opacity: 0, y: 80, scale: 0.8 });
+          // Initialisation de l'état des cartes
+          gsap.set(card, {
+            opacity: 0,
+            y: 80,
+            scale: 0.8
+          });
+
+          // Création de l'animation ScrollTrigger
           ScrollTrigger.create({
             trigger: card,
-            start: 'top 85%',
+            start: 'top 80%', // Déclenchement un peu plus tôt
+            toggleActions: 'play none none none', // Se joue seulement à l'entrée
             onEnter: () => {
               gsap.to(card, {
                 opacity: 1,
                 y: 0,
                 scale: 1,
                 duration: 0.8,
-                delay: index * 0.15,
-                ease: 'back.out(1.2)'
+                delay: index * 0.1, // Délai réduit pour un effet plus fluide
+                ease: 'power3.out', // Easing plus doux
+                overwrite: 'auto' // Gère mieux les conflits d'animation
+              });
+            },
+            // Réinitialisation au scroll inverse
+            onEnterBack: () => {
+              gsap.to(card, {
+                opacity: 1,
+                y: 0,
+                scale: 1,
+                duration: 0.5
               });
             }
           });
@@ -215,7 +229,8 @@ export class HomeComponentComponent implements OnInit {
               scale: 1,
               duration: 0.6,
               stagger: 0.1,
-              ease: 'back.out(1.4)'
+              ease: 'back.out(1.4)',
+              overwrite: 'auto'
             });
           }
         });
@@ -243,7 +258,7 @@ export class HomeComponentComponent implements OnInit {
       const hero = document.querySelector('.hero');
       if (hero) {
         gsap.to(hero, {
-          yPercent: -50,
+          yPercent: -10,
           ease: 'none',
           scrollTrigger: {
             trigger: hero,
@@ -343,4 +358,69 @@ export class HomeComponentComponent implements OnInit {
     }
   }
 
+  // Dans votre classe component
+  showImmobilierPopup = false;
+  immobilierOptions = [
+    {
+      icon: '🏠', // Icône plus standard pour les maisons
+      title: 'Maisons',
+      description: 'Trouvez des maisons à acheter ou louer'
+    },
+    {
+      icon: '🏢', // Icône d'immeuble pour appartements
+      title: 'Appartements',
+      description: 'Appartements en location ou à vendre'
+    },
+    {
+      icon: '🛌', // Icône de lit pour chambres
+      title: 'Chambres',
+      description: 'Chambres à louer pour étudiants ou jeunes actifs'
+    },
+    {
+      icon: '🏩', // Icône d'hôtel plus élégante
+      title: 'Hôtels',
+      description: 'Réservation d\'hôtels et locations mensuelles'
+    },
+    {
+      icon: '🗾', // Icône de terrain avec montagnes
+      title: 'Terrains',
+      description: 'Terrains constructibles à vendre'
+    },
+    {
+      icon: '👵', // Icône pour résidences séniors
+      title: 'Résidences',
+      description: 'Résidences services et séniors'
+    },
+    {
+      icon: '👥', // Icône de personnes pour colocation
+      title: 'Colocations',
+      description: 'Trouver un colocataire'
+    },
+    {
+      icon: '📊', // Icône de graphique pour gestion
+      title: 'Gestion locative',
+      description: 'Trouver un gestionnaire locatif'
+    },
+    {
+      icon: '💰', // Icône d'argent pour estimation
+      title: 'Estimation',
+      description: 'Estimation des propriétés à vendre'
+    }
+  ];
+
+  openImmobilierPopup() {
+    this.showImmobilierPopup = true;
+  }
+
+  closeImmobilierPopup() {
+    this.showImmobilierPopup = false;
+  }
+
+  selectImmobilierOption(option: any) {
+    this.closeImmobilierPopup();
+    // Vous pouvez ajouter ici la logique pour rediriger vers la page spécifique
+    console.log('Option sélectionnée:', option);
+    // Par exemple :
+    // this.router.navigate(['/immobilier', option.title.toLowerCase()]);
+  }
 }

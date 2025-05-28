@@ -3,7 +3,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
 <!-- Hero Section -->
-<div *ngIf="currentPage === 'home'">
+<!--<div *ngIf="currentPage === 'home'">-->
   <section class="hero" id="accueil">
     <div class="container">
       <h1>Tous vos services en un seul endroit</h1>
@@ -17,7 +17,7 @@
 
   <section class="frequency">
     <div class="container">
-      <h3>Accès rapides</h3>
+<!--      <h3>Accès rapides</h3>-->
       <ul class="frequency-list">
         <li (click)="showServicePage('artisans')">
           Électricité
@@ -45,11 +45,6 @@
           <span class="service-icon">🔧</span>
           <h3>Techniciens</h3>
           <p>Trouvez des professionnels qualifiés pour tous vos travaux et réparations</p>
-          <ul class="service-list">
-            <li *ngFor="let artisan of artisans">
-              {{artisan}}
-            </li>
-          </ul>
           <a href="" (click)="showServicePage('artisan')" class="explore-btn">Explorer</a>
         </div>
 
@@ -58,37 +53,22 @@
           <span class="service-icon">🚗</span>
           <h3>Transport & Véhicules</h3>
           <p>Solutions complètes pour tous vos besoins de transport et automobile</p>
-          <ul class="service-list">
-            <li *ngFor="let transport of vehicles">
-              {{transport}}
-            </li>
-          </ul>
           <a (click)="showServicePage('transport')" class="explore-btn">Explorer</a>
         </div>
 
-        <!-- Immobilier -->
-        <div class="service-card fade-in">
+        <!-- Immobilier --><div class="service-card fade-in">
           <span class="service-icon">🏠</span>
           <h3>Immobilier</h3>
           <p>Trouvez votre logement idéal ou investissez dans l'immobilier</p>
-          <ul class="service-list">
-            <li *ngFor="let immobilier of immobiliers">
-              {{immobilier}}
-            </li>
-          </ul>
-          <a (click)="showServicePage('immobilier')" class="explore-btn">Explorer</a>
-        </div>
+
+          <a (click)="openImmobilierPopup()" class="explore-btn">Explorer</a>
+      </div>
 
         <!-- Services à domicile -->
         <div class="service-card fade-in">
           <span class="service-icon">🏡</span>
           <h3>Services à Domicile</h3>
           <p>Profitez de services de qualité directement chez vous</p>
-          <ul class="service-list">
-            <li *ngFor="let service of serviceDomicile">
-              {{service}}
-            </li>
-          </ul>
           <a href="" (click)="showServicePage('domicile')" class="explore-btn">Explorer</a>
         </div>
 
@@ -97,16 +77,6 @@
           <span class="service-icon">🎉</span>
           <h3>Événements</h3>
           <p>Organisez vos événements avec nos prestataires spécialisés</p>
-          <ul class="service-list">
-            <li>Photographes/vidéastes</li>
-            <li>DJ & animation musicale</li>
-            <li>Traiteurs & restauration</li>
-            <li>Location de salles</li>
-            <li>Décoration événementielle</li>
-            <li>Wedding planner</li>
-            <li>Spectacles & artistes</li>
-            <li>Location de matériel</li>
-          </ul>
           <a href="#" class="explore-btn">Explorer</a>
         </div>
 
@@ -115,16 +85,6 @@
           <span class="service-icon">🏥</span>
           <h3>Santé & Bien-être</h3>
           <p>Prenez soin de votre santé avec nos professionnels</p>
-          <ul class="service-list">
-            <li>Médecins généralistes</li>
-            <li>Kinésithérapeutes</li>
-            <li>Psychologues</li>
-            <li>Dentistes</li>
-            <li>Nutritionnistes</li>
-            <li>Pharmacies de garde</li>
-            <li>Laboratoires d'analyses</li>
-            <li>Coaching sportif</li>
-          </ul>
           <a href="#" class="explore-btn">Explorer</a>
         </div>
       </div>
@@ -169,8 +129,21 @@
     </div>
   </section>
 
+<!--Popup detail service-->
+
+<div id="immobilier-popup" class="popup-overlay" *ngIf="showImmobilierPopup">
+    <div class="popup-content">
+        <button class="close-btn" (click)="closeImmobilierPopup()">&times;</button>
+        <h3>Choisissez une spécificité immobilière</h3>
+        <div class="popup-options">
+            <div class="option-card" *ngFor="let option of immobilierOptions" (click)="showServicePage('immobilier')">
+                <span class="option-icon">{{option.icon}}</span>
+                <h4>{{option.title}}</h4>
+                <p>{{option.description}}</p>
+            </div>
+        </div>
+    </div>
 </div>
 
 <!-- Footer -->
-<!--<app-services-component></app-services-component>-->
 
