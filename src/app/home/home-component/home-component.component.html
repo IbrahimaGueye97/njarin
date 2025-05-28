@@ -15,21 +15,24 @@
     </div>
   </section>
 
-  <section class="frequency">
+<section class="frequency">
     <div class="container">
-<!--      <h3>Accès rapides</h3>-->
-      <ul class="frequency-list">
-        <li (click)="showServicePage('artisans')">
-          Électricité
-        </li>
-        <li (click)="showServicePage('artisans')">Plomberie</li>
-        <li (click)="showServicePage('transport')">Taxi</li>
-        <li (click)="showServicePage('immobilier')">Trouver une chambre</li>
-        <li (click)="showServicePage('immobilier')">Hôtel</li>
-        <li (click)="showServicePage('domicile')">Restaurant</li>
-      </ul>
+        <div class="scroll-wrapper">
+            <ul class="frequency-list">
+                <li (click)="showServicePage('artisans')">Électricité</li>
+                <li (click)="showServicePage('artisans')">Plomberie</li>
+                <li (click)="showServicePage('transport')">Taxi</li>
+                <li (click)="showServicePage('immobilier')">Trouver une chambre</li>
+                <li (click)="showServicePage('immobilier')">Hôtel</li>
+                <li (click)="showServicePage('domicile')">Restaurant</li>
+                <!-- Ajoutez d'autres éléments si nécessaire -->
+                <li (click)="showServicePage('artisans')">Menuiserie</li>
+                <li (click)="showServicePage('artisans')">Climatisation</li>
+                <li (click)="showServicePage('domicile')">Nettoyage</li>
+            </ul>
+        </div>
     </div>
-  </section>
+</section>
 
   <!-- Services Section -->
   <section class="services-section" id="services">
