@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {NgForOf, NgIf} from '@angular/common';
 import {Router} from '@angular/router';
 import { gsap } from 'gsap';
@@ -58,7 +58,7 @@ export enum ServiceDomicle {
   templateUrl: './home-component.component.html',
   styleUrl: './home-component.component.css'
 })
-export class HomeComponentComponent implements OnInit {
+export class HomeComponentComponent implements OnInit, OnDestroy {
 
   currentPage: string = 'home';
 
@@ -121,11 +121,25 @@ export class HomeComponentComponent implements OnInit {
 
     }, 100);
 
+    this.scrollToTop();
+  }
+
+  ngOnDestroy() {
+    this.scrollToTop();
+  }
+
+  private scrollToTop() {
+    window.scrollTo(0, 0);
+    document.documentElement.scrollTop = 0;
+    document.body.scrollTop = 0;
   }
 
 
   register(): void {
     console.log("Redirect to register");
+    setTimeout(() => {
+      this.scrollToTop();
+    },0)
     this.router.navigate(['/register']).then(() => {});
   }
 
@@ -359,7 +373,32 @@ export class HomeComponentComponent implements OnInit {
   }
 
   // Dans votre classe component
-  showImmobilierPopup = false;
+  showPopup = [
+    {
+      name: 'Immobilier',
+      show: false
+    },
+    {
+      name: 'Transport',
+      show: false
+    },
+    {
+      name: 'Domicile',
+      show: false
+    },
+    {
+      name: 'Événements',
+      show: false
+    },
+    {
+      name: 'Santé',
+      show: false
+    },
+    {
+      name: 'Techniciens',
+      show: false
+    }
+  ];
   immobilierOptions = [
     {
       icon: '🏠', // Icône plus standard pour les maisons
@@ -408,12 +447,33 @@ export class HomeComponentComponent implements OnInit {
     }
   ];
 
-  openImmobilierPopup() {
-    this.showImmobilierPopup = true;
+  openPopup(value: string) {
+    switch (value) {
+      case 'immobilier':
+        this.showPopup[0].show = true;
+        break;
+      case 'transport':
+        this.showPopup[1].show = true;
+        break;
+      case 'domicile':
+        this.showPopup[2].show = false;
+        break;
+      case 'Événements':
+        this.showPopup[3].show = false;
+        break;
+      case 'Sante':
+        this.showPopup[4].show = true;
+        break;
+      case 'Technicien':
+        this.showPopup[5].show = false;
+        break;
+      default:
+        this.router.navigate(['']).then(() => {});
+    }
   }
 
   closeImmobilierPopup() {
-    this.showImmobilierPopup = false;
+    this.showPopup[0].show = false;
   }
 
   selectImmobilierOption(option: any) {

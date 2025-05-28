@@ -10,7 +10,7 @@
       <p>Trouvez facilement des artisans qualifiés, louez une voiture, découvrez des biens immobiliers et bien plus encore. Votre plateforme de services tout-en-un.</p>
       <div class="hero-cta">
         <button class="btn-primary" (click)="scrollToServices()">Explorer les services</button>
-        <a href="#" class="btn-secondary">Créer un compte</a>
+        <a (click)="register()" class="btn-secondary">Créer un compte</a>
       </div>
     </div>
   </section>
@@ -64,7 +64,7 @@
           <h3>Immobilier</h3>
           <p>Trouvez votre logement idéal ou investissez dans l'immobilier</p>
 
-          <a (click)="openImmobilierPopup()" class="explore-btn">Explorer</a>
+          <a (click)="openPopup('immobilier')" class="explore-btn">Explorer</a>
       </div>
 
         <!-- Services à domicile -->
@@ -134,12 +134,14 @@
 
 <!--Popup detail service-->
 
-<div id="immobilier-popup" class="popup-overlay" *ngIf="showImmobilierPopup">
+<div id="immobilier-popup" class="popup-overlay" *ngIf="showPopup[0].show">
     <div class="popup-content">
         <button class="close-btn" (click)="closeImmobilierPopup()">&times;</button>
         <h3>Choisissez une spécificité immobilière</h3>
         <div class="popup-options">
-            <div class="option-card" *ngFor="let option of immobilierOptions" (click)="showServicePage('immobilier')">
+            <div class="option-card"
+                 *ngFor="let option of immobilierOptions"
+                 (click)="showServicePage('immobilier')">
                 <span class="option-icon">{{option.icon}}</span>
                 <h4>{{option.title}}</h4>
                 <p>{{option.description}}</p>

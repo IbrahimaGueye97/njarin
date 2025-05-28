@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {FormsModule} from '@angular/forms';
 import {NgForOf, NgIf} from '@angular/common';
 import {Router} from '@angular/router';
@@ -42,10 +42,24 @@ export interface RegisterData {
 })
 
 
-export class RegisterComponentComponent {
+export class RegisterComponentComponent implements OnInit, OnDestroy {
 
   constructor(private readonly router: Router) {
   }
+
+    ngOnInit() {
+      this.scrollToTop();
+    }
+
+    ngOnDestroy() {
+      this.scrollToTop();
+    }
+
+    private scrollToTop() {
+      window.scrollTo(0, 0);
+      document.documentElement.scrollTop = 0;
+      document.body.scrollTop = 0;
+    }
 
   registerData: RegisterData = {
     lastName: '',
@@ -87,6 +101,9 @@ export class RegisterComponentComponent {
 
   goToLogin(event: Event) {
     event.preventDefault();
+    setTimeout(() => {
+      this.scrollToTop();
+    }, 0)
     this.router.navigate(['/login']).then(() => {});
   }
 
