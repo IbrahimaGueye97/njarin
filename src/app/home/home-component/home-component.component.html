@@ -3,7 +3,6 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
 <!-- Hero Section -->
-<!--<div *ngIf="currentPage === 'home'">-->
   <section class="hero" id="accueil">
     <div class="container">
       <h1>Tous vos services en un seul endroit</h1>
@@ -19,16 +18,43 @@
     <div class="container">
         <div class="scroll-wrapper">
             <ul class="frequency-list">
-                <li (click)="showServicePage('artisans')">Électricité</li>
-                <li (click)="showServicePage('artisans')">Plomberie</li>
-                <li (click)="showServicePage('transport')">Taxi</li>
-                <li (click)="showServicePage('immobilier')">Trouver une chambre</li>
-                <li (click)="showServicePage('immobilier')">Hôtel</li>
-                <li (click)="showServicePage('domicile')">Restaurant</li>
+                <li (click)="showServicePage('artisans', '')"
+                (keydown.enter)="showServicePage('artisans', '')">
+                    Électricité
+                </li>
+                <li (click)="showServicePage('artisans', '')"
+                    (keydown.enter)="showServicePage('artisans', '')">
+                    Plomberie
+                </li>
+                <li (click)="showServicePage('transport', '')"
+                    (keydown.enter)="showServicePage('artisans', '')">
+                    Taxi
+                </li>
+                <li (click)="showServicePage('immobilier', '')"
+                    (keydown.enter)="showServicePage('artisans', '')">
+                    Trouver une chambre
+                </li>
+                <li (click)="showServicePage('immobilier', '')"
+                    (keydown.enter)="showServicePage('artisans', '')">
+                    Hôtel
+                </li>
+                <li (click)="showServicePage('domicile' ,'')"
+                    (keydown.enter)="showServicePage('artisans', '')">
+                    Restaurant
+                </li>
                 <!-- Ajoutez d'autres éléments si nécessaire -->
-                <li (click)="showServicePage('artisans')">Menuiserie</li>
-                <li (click)="showServicePage('artisans')">Climatisation</li>
-                <li (click)="showServicePage('domicile')">Nettoyage</li>
+                <li (click)="showServicePage('artisans','')"
+                    (keydown.enter)="showServicePage('artisans', '')">
+                    Menuiserie
+                </li>
+                <li (click)="showServicePage('artisans', '')"
+                    (keydown.enter)="showServicePage('artisans', '')">
+                    Climatisation
+                </li>
+                <li (click)="showServicePage('domicile', '')"
+                    (keydown.enter)="showServicePage('artisans', '')">
+                    Nettoyage
+                </li>
             </ul>
         </div>
     </div>
@@ -48,7 +74,7 @@
           <span class="service-icon">🔧</span>
           <h3>Techniciens</h3>
           <p>Trouvez des professionnels qualifiés pour tous vos travaux et réparations</p>
-          <a href="" (click)="showServicePage('artisan')" class="explore-btn">Explorer</a>
+          <a (click)="openPopup('technicien')" class="explore-btn">Explorer</a>
         </div>
 
         <!-- Transport & Véhicules -->
@@ -56,7 +82,7 @@
           <span class="service-icon">🚗</span>
           <h3>Transport & Véhicules</h3>
           <p>Solutions complètes pour tous vos besoins de transport et automobile</p>
-          <a (click)="showServicePage('transport')" class="explore-btn">Explorer</a>
+          <a (click)="openPopup('transport')" class="explore-btn">Explorer</a>
         </div>
 
         <!-- Immobilier --><div class="service-card fade-in">
@@ -72,7 +98,7 @@
           <span class="service-icon">🏡</span>
           <h3>Services à Domicile</h3>
           <p>Profitez de services de qualité directement chez vous</p>
-          <a href="" (click)="showServicePage('domicile')" class="explore-btn">Explorer</a>
+          <a (click)="openPopup('domicile')" class="explore-btn">Explorer</a>
         </div>
 
         <!-- Événements -->
@@ -80,7 +106,7 @@
           <span class="service-icon">🎉</span>
           <h3>Événements</h3>
           <p>Organisez vos événements avec nos prestataires spécialisés</p>
-          <a href="#" class="explore-btn">Explorer</a>
+          <a (click)="openPopup('evénements')" class="explore-btn">Explorer</a>
         </div>
 
         <!-- Santé & Bien-être -->
@@ -88,7 +114,7 @@
           <span class="service-icon">🏥</span>
           <h3>Santé & Bien-être</h3>
           <p>Prenez soin de votre santé avec nos professionnels</p>
-          <a href="#" class="explore-btn">Explorer</a>
+          <a class="explore-btn">Explorer</a>
         </div>
       </div>
     </div>
@@ -134,21 +160,7 @@
 
 <!--Popup detail service-->
 
-<div id="immobilier-popup" class="popup-overlay" *ngIf="showPopup[0].show">
-    <div class="popup-content">
-        <button class="close-btn" (click)="closeImmobilierPopup()">&times;</button>
-        <h3>Choisissez une spécificité immobilière</h3>
-        <div class="popup-options">
-            <div class="option-card"
-                 *ngFor="let option of immobilierOptions"
-                 (click)="showServicePage('immobilier')">
-                <span class="option-icon">{{option.icon}}</span>
-                <h4>{{option.title}}</h4>
-                <p>{{option.description}}</p>
-            </div>
-        </div>
-    </div>
-</div>
+<app-popup-service></app-popup-service>
 
 <!-- Footer -->
 

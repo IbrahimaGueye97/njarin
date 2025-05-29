@@ -1,9 +1,9 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
-import {NgForOf, NgIf} from '@angular/common';
 import {Router} from '@angular/router';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import {SharedService} from '../../shared/shared.service';
+import {PopupServiceComponent} from "../popup-service/popup-service.component";
 
 export enum Artisans {
   ELECTRICITES = 'Électriciens certifiés',
@@ -52,8 +52,7 @@ export enum ServiceDomicle {
   selector: 'app-home-component',
   standalone: true,
   imports: [
-    NgForOf,
-    NgIf,
+    PopupServiceComponent,
   ],
   templateUrl: './home-component.component.html',
   styleUrl: './home-component.component.css'
@@ -153,11 +152,8 @@ export class HomeComponentComponent implements OnInit, OnDestroy {
     }
   }
 
-  showServicePage(serviceType: string): void {
-    this.currentPage = serviceType;
-    this.sharedService.setPage(serviceType);
-    console.log(`Naviguer vers la page de service: ${serviceType}`);
-    this.router.navigate(['/services']).then(() => {});
+  showServicePage(serviceType: string, option: string): void {
+    this.sharedService.navigateToService(serviceType, option);
   }
 
   showHomepage(): void {
@@ -373,114 +369,43 @@ export class HomeComponentComponent implements OnInit, OnDestroy {
   }
 
   // Dans votre classe component
-  showPopup = [
-    {
-      name: 'Immobilier',
-      show: false
-    },
-    {
-      name: 'Transport',
-      show: false
-    },
-    {
-      name: 'Domicile',
-      show: false
-    },
-    {
-      name: 'Événements',
-      show: false
-    },
-    {
-      name: 'Santé',
-      show: false
-    },
-    {
-      name: 'Techniciens',
-      show: false
-    }
-  ];
-  immobilierOptions = [
-    {
-      icon: '🏠', // Icône plus standard pour les maisons
-      title: 'Maisons',
-      description: 'Trouvez des maisons à acheter ou louer'
-    },
-    {
-      icon: '🏢', // Icône d'immeuble pour appartements
-      title: 'Appartements',
-      description: 'Appartements en location ou à vendre'
-    },
-    {
-      icon: '🛌', // Icône de lit pour chambres
-      title: 'Chambres',
-      description: 'Chambres à louer pour étudiants ou jeunes actifs'
-    },
-    {
-      icon: '🏩', // Icône d'hôtel plus élégante
-      title: 'Hôtels',
-      description: 'Réservation d\'hôtels et locations mensuelles'
-    },
-    {
-      icon: '🗾', // Icône de terrain avec montagnes
-      title: 'Terrains',
-      description: 'Terrains constructibles à vendre'
-    },
-    {
-      icon: '👵', // Icône pour résidences séniors
-      title: 'Résidences',
-      description: 'Résidences services et séniors'
-    },
-    {
-      icon: '👥', // Icône de personnes pour colocation
-      title: 'Colocations',
-      description: 'Trouver un colocataire'
-    },
-    {
-      icon: '📊', // Icône de graphique pour gestion
-      title: 'Gestion locative',
-      description: 'Trouver un gestionnaire locatif'
-    },
-    {
-      icon: '💰', // Icône d'argent pour estimation
-      title: 'Estimation',
-      description: 'Estimation des propriétés à vendre'
-    }
-  ];
+  // showPopup = {
+  //   name: '',
+  //   show: false,
+  // }
+
 
   openPopup(value: string) {
+    console.log('======================= ' + value);
+    let newState : {name: string, show: boolean};
     switch (value) {
       case 'immobilier':
-        this.showPopup[0].show = true;
+        newState = {name: 'Immobilier', show: true};
         break;
       case 'transport':
-        this.showPopup[1].show = true;
+        newState = {name: 'Transport', show: true};
         break;
       case 'domicile':
-        this.showPopup[2].show = false;
+        newState = {name: 'domicile', show: true};
         break;
       case 'Événements':
-        this.showPopup[3].show = false;
+        newState = {name: 'Événements', show: true};
         break;
       case 'Sante':
-        this.showPopup[4].show = true;
+        newState = {name: 'Sante', show: true};
         break;
-      case 'Technicien':
-        this.showPopup[5].show = false;
+      case 'technicien':
+        newState = {name: 'Technicien', show: true};
         break;
       default:
         this.router.navigate(['']).then(() => {});
+        return;
     }
+    this.sharedService.setShowPopup(newState);
   }
 
-  closeImmobilierPopup() {
-    this.showPopup[0].show = false;
-  }
 
   selectImmobilierOption(option: any) {
-    this.closeImmobilierPopup();
-    // Vous pouvez ajouter ici la logique pour rediriger vers la page spécifique
     console.log('Option sélectionnée:', option);
-    // Par exemple :
-    // this.router.navigate(['/immobilier', option.title.toLowerCase()]);
   }
 }

@@ -97,3 +97,36 @@
     </div>
   </div>
 </div>
+
+<div id="domicile-page" class="service-page" *ngIf="currentPage === 'techniciens'">
+    <div class="container">
+        <button class="back-btn" (click)="showHomepage()">← Retour à l'accueil</button>
+        <div class="service-header">
+            <h1>🏡 Services à Domicile</h1>
+            <p>Des services de qualité directement chez vous</p>
+        </div>
+        <div class="service-providers">
+            <div class="provider-card">
+                <h3>Sophie - Femme de ménage</h3>
+                <p>⭐ 4.9/5 (156 avis)</p>
+                <p>📍 Dakar & banlieue</p>
+                <p>Service de ménage professionnel, produits écologiques</p>
+                <button class="explore-btn">Réserver</button>
+            </div>
+            <div class="provider-card">
+                <h3>Mathieu - Cours particuliers</h3>
+                <p>⭐ 4.8/5 (89 avis)</p>
+                <p>📍 Rufisque Ville</p>
+                <p>Professeur certifié, mathématiques et physique niveau lycée</p>
+                <button class="explore-btn">Contacter</button>
+            </div>
+            <div class="provider-card">
+                <h3>Foodie Express</h3>
+                <p>⭐ 4.7/5 (342 avis)</p>
+                <p>📍 Livraison 24h/24</p>
+                <p>Livraison de repas gastronomiques en moins de 30min</p>
+                <button class="explore-btn">Commander</button>
+            </div>
+        </div>
+    </div>
+</div>

@@ -25,7 +25,7 @@ export class ServicesComponentComponent implements OnInit {
   }
 
   showHomepage() {
-    this.sharedService.setPage('home');
+    this.sharedService.setCurrentPage('home');
     this.routes.navigate(['']).then();
   }
 }

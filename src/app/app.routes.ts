@@ -25,5 +25,9 @@ export const routes: Routes = [
   {
     path: 'services',
     component: ServicesComponentComponent
+  },
+  {
+    path: '**',
+    component: HomeComponentComponent
   }
 ];

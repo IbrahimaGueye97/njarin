@@ -33,13 +33,7 @@ export class LoginComponentComponent implements OnInit, OnDestroy {
   }
 
   private scrollToTop() {
-    // Méthode 1: Scroll immédiat
     window.scrollTo(0, 0);
-
-    // Méthode 2: Scroll avec animation (optionnel)
-    // window.scrollTo({ top: 0, behavior: 'smooth' });
-
-    // Méthode 3: Réinitialise aussi le scroll de document
     document.documentElement.scrollTop = 0;
     document.body.scrollTop = 0;
   }
