@@ -1,0 +1,41 @@
+<div id="immobilier-popup" class="popup-overlay" *ngIf="showPopup.show">
+    <div class="popup-content">
+        <button class="close-btn" (click)="closePopup()">&times;</button>
+        <h3>Choisissez une spécificité</h3>
+        <div class="popup-options" [ngSwitch]="showPopup.name">
+
+            <!-- Options pour immobilier -->
+            <ng-container *ngSwitchCase="'Immobilier'">
+                <div class="option-card" *ngFor="let option of immobilierOptions"
+                     (click)="showServicePage('immobilier', option.title)"
+                     (keydown.enter)="showServicePage('immobilier', option.title)">
+                    <span class="option-icon">{{option.icon}}</span>
+                    <h4>{{option.title}}</h4>
+                    <p>{{option.description}}</p>
+                </div>
+            </ng-container>
+
+            <!-- Options pour transport -->
+            <ng-container *ngSwitchCase="'Transport'">
+                <div class="option-card" *ngFor="let option of transportOptions"
+                     (click)="showServicePage('transport', '')"
+                     (keydown.enter)="showServicePage('transport', option.title)">
+                    <span class="option-icon">{{option.icon}}</span>
+                    <h4>{{option.title}}</h4>
+                    <p>{{option.description}}</p>
+                </div>
+            </ng-container>
+
+            <!-- Option pour artisans -->
+            <ng-container *ngSwitchCase="'Technicien'">
+                <div class="option-card" *ngFor="let option of artisanOptions"
+                     (click)="showServicePage('techniciens', '')"
+                     (keydown.enter)="showServicePage('techniciens', '')">
+                    <span class="option-icon">{{option.icon}}</span>
+                    <h4>{{option.title}}</h4>
+                    <p>{{option.description}}</p>
+                </div>
+            </ng-container>
+        </div>
+    </div>
+</div>
