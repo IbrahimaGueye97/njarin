@@ -14,12 +14,13 @@
     </div>
   </section>
 
-<section class="frequency">
+<section class="frequency" id="scrollers">
     <div class="container">
         <div class="scroll-wrapper">
             <ul class="frequency-list">
                 <li (click)="showServicePage('artisans', '')"
                 (keydown.enter)="showServicePage('artisans', '')">
+<!--                    <span class="option-icon">🏢</span>-->
                     Électricité
                 </li>
                 <li (click)="showServicePage('artisans', '')"
@@ -32,6 +33,7 @@
                 </li>
                 <li (click)="showServicePage('immobilier', '')"
                     (keydown.enter)="showServicePage('artisans', '')">
+                    <span class="option-icon">🏠</span>
                     Trouver une chambre
                 </li>
                 <li (click)="showServicePage('immobilier', '')"
@@ -152,7 +154,7 @@
         <p>Rejoignez des milliers d'utilisateurs qui font confiance à ServiceHub pour leurs besoins quotidiens</p>
         <div class="hero-cta">
           <a class="btn-primary" (click)="register()">Créer un compte</a>
-          <a class="btn-secondary" (click)="register()">Devenir prestataire</a>
+          <a class="btn-secondary" (click)="openPopup('prestataire')">Devenir prestataire</a>
         </div>
       </div>
     </div>

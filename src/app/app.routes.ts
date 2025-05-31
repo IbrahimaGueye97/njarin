@@ -5,6 +5,7 @@ import {RegisterComponentComponent} from './auth/register-component/register-com
 import {
   ServicesComponentComponent
 } from './artisans-depanneurs-services/services-component/services-component.component';
+import {PrestataireComponentComponent} from "./auth/prespataire-component/prestataire-component.component";
 
 export const routes: Routes = [
   {
@@ -25,6 +26,10 @@ export const routes: Routes = [
   {
     path: 'services',
     component: ServicesComponentComponent
+  },
+  {
+    path: 'prestataire',
+    component: PrestataireComponentComponent
   },
   {
     path: '**',

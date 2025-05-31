@@ -86,10 +86,46 @@ export class PopupServiceComponent implements OnInit {
     transportOptions = [
         {
             icon: '<UNK>',
-            title: 'Unknown',
-            description: 'Unknown',
+            title: 'Taxi',
+            description: 'Trouver un taxi',
+        },
+        {
+            icon: '<UNK>',
+            title: 'Livraison',
+            description: 'Livraison express',
+        },
+        {
+            icon: '<UNK>',
+            title: 'Location',
+            description: 'Trouver une voiture a louer une voiture',
+        },
+        {
+            icon: '<UNK>',
+            title: 'Achat',
+            description: 'Achat/vente de véhicules',
+        },
+        {
+            icon: '<UNK>',
+            title: 'Pieces',
+            description: 'Pièces détachées auto et moto',
+        },
+        {
+            icon: '<UNK>',
+            title: 'Camion',
+            description: 'Location camionnette',
+        },
+        {
+            icon: '<UNK>',
+            title: "Covoiturage",
+            description: 'Covoiturage'
+        },
+        {
+            icon: '<UNK>',
+            title: 'Transport marchandise',
+            description: 'Transport de marchandises'
         }
     ];
+
     artisanOptions = [
         {
             icon: '<UNK>',
@@ -101,7 +137,20 @@ export class PopupServiceComponent implements OnInit {
             title: 'Unknown',
             description: 'Unknown',
         }
+
     ];
+
+    prestataire = [
+        'Entreprise',
+        'Restaurant',
+        'Ouvrier',
+        'Technicien califier',
+        'Hotel',
+        'Agence Immobiliere',
+        'Taxi',
+        'Agence de recrutement',
+        'Artisan'
+    ]
 
 
 }

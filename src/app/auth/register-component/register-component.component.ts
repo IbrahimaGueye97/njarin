@@ -2,6 +2,7 @@ import {Component, OnDestroy, OnInit} from '@angular/core';
 import {FormsModule} from '@angular/forms';
 import {NgForOf, NgIf} from '@angular/common';
 import {Router} from '@angular/router';
+import {PrestataireComponentComponent} from "../prespataire-component/prestataire-component.component";
 
 export interface Address {
   street?: string;
@@ -35,7 +36,8 @@ export interface RegisterData {
   imports: [
     FormsModule,
     NgIf,
-    NgForOf
+    NgForOf,
+    PrestataireComponentComponent
   ],
   templateUrl: './register-component.component.html',
   styleUrl: './register-component.component.css'

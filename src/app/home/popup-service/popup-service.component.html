@@ -36,6 +36,17 @@
                     <p>{{option.description}}</p>
                 </div>
             </ng-container>
+
+            <ng-container *ngSwitchCase="'Prestataire'">
+                <div class="option-card" *ngFor="let option of prestataire"
+                     (click)="showServicePage('Prestataire', 'hello')"
+                     (keydown.enter)="showServicePage('Prestataire', '')">
+                    <span class="option-icon">{{option}}</span>
+                    <h4>Choisissez ce que vous faites</h4>
+                    <p>Njarin vous garantie une visibilitee !!!</p>
+                </div>
+            </ng-container>
+
         </div>
     </div>
 </div>

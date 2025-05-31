@@ -1,0 +1,43 @@
+<div id="popup" class="popup-overlay" *ngIf="showPopup.show">
+    <div class="popup-content">
+        <button class="close-btn" (click)="closePopup()">&times;</button>
+        <h3>Choisissez une spécificité</h3>
+        <div class="popup-options">
+
+            <!-- Options pour immobilier -->
+                <div class="option-card">
+                    <span class="option-icon"></span>
+<!--                    <h4>Nom de l'entreprise</h4>-->
+                    <label for="code">Nom de l'entreprise</label>
+                    <input type="text" class="form-input">
+                    <label for="code">Type d'entreprise</label>
+                    <select name="selected" id="" class="form-select">
+                        <option value="">Selectionner le type d'entreprise</option>
+                        <option value="">Vente</option>
+                        <option value="">Prestation service</option>
+                        <option value="">Location de voiture</option>
+                    </select>
+<!--                    <h4>Description</h4>-->
+
+                    <label for="code">Description l'entreprise</label>
+                    <input type="text" class="form-input">
+<!--                    <h4>Nombre d'enployer</h4>-->
+
+                    <label for="code">Nombre d'employer</label>
+                    <select name="selected" id="" class="form-select">
+                        <option value="">Selectionner le nombre d'employer</option>
+                        <option value="">1</option>
+                        <option value="">1 a 5</option>
+                        <option value="">3 a 10</option>
+                        <option value="">10 a 20</option>
+                        <option value="">20 a 50</option>
+                        <option value="">50 a 100</option>
+                        <option value="">Plus de 100</option>
+                    </select>
+<!--                    <h3>Merci de votre confience</h3>-->
+                    <button type="submit" class="btn-register">Evoyer</button>
+                </div>
+
+        </div>
+    </div>
+</div>

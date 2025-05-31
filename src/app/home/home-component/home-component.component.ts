@@ -143,11 +143,14 @@ export class HomeComponentComponent implements OnInit, OnDestroy {
   }
 
   scrollToServices(): void {
-    const servicesSection = document.getElementById('services');
+    const servicesSection = document.getElementById('scrollers');
     if (servicesSection) {
-      servicesSection.scrollIntoView({
-        behavior: 'smooth',
-        block: 'start'
+      const elementPosition = servicesSection.getBoundingClientRect().top;
+      const offsetPosition = elementPosition + window.scrollY - 80; // Ajustez 80px selon votre header
+
+      window.scrollTo({
+        top: offsetPosition,
+        behavior: 'smooth'
       });
     }
   }
@@ -388,14 +391,17 @@ export class HomeComponentComponent implements OnInit, OnDestroy {
       case 'domicile':
         newState = {name: 'domicile', show: true};
         break;
-      case 'Événements':
+      case 'evénements':
         newState = {name: 'Événements', show: true};
         break;
-      case 'Sante':
+      case 'sante':
         newState = {name: 'Sante', show: true};
         break;
       case 'technicien':
         newState = {name: 'Technicien', show: true};
+        break;
+      case 'prestataire':
+        newState = {name: 'Prestataire', show: true};
         break;
       default:
         this.router.navigate(['']).then(() => {});

@@ -32,7 +32,20 @@ export class SharedService {
   }
 
   navigateToService(serviceType: string, option?: string): void {
+    console.log("navigateToService", serviceType, option);
+    if (serviceType === 'home') {
+      this.router.navigate(['/']).then();
+      return;
+    }
+    if (serviceType === 'Prestataire') {
+      console.log("got prestaitaire");
+      this.router.navigate(['/prestataire']).then(() => {});
+      return;
+    }
     console.log('serviceOption = ', option);
+    if (option) {
+      console.log('Request select all for options', option);
+    }
     this.setCurrentPage(serviceType);
     console.log(`Naviguer vers la page de service: ${serviceType}`);
     this.router.navigate(['/services']).then(()=>{
