@@ -19,7 +19,6 @@ export class PopupServiceComponent implements OnInit {
     showPopup = {name: '', show: true};
 
     ngOnInit() {
-        console.log("showPopup init", this.showPopup);
         this.sharedService.showPopup$.subscribe(showPopup => {
             this.showPopup = showPopup;
         });
@@ -27,11 +26,12 @@ export class PopupServiceComponent implements OnInit {
     }
 
     showServicePage(serviceType: string, option: string): void {
+        this.showPopup.show = !this.showPopup.show;
         this.sharedService.navigateToService(serviceType, option);
     }
 
     closePopup() {
-        this.showPopup.show = false;
+        this.showPopup.show = !this.showPopup.show;
     }
 
 
@@ -140,17 +140,104 @@ export class PopupServiceComponent implements OnInit {
 
     ];
 
-    prestataire = [
-        'Entreprise',
-        'Restaurant',
-        'Ouvrier',
-        'Technicien califier',
-        'Hotel',
-        'Agence Immobiliere',
-        'Taxi',
-        'Agence de recrutement',
-        'Artisan'
-    ]
+     prestataireOptions = [
+        {
+            icon: '🏢',
+            title: 'Entreprise',
+            description: 'Sociétés et structures professionnelles diverses'
+        },
+        {
+            icon: '🍽️',
+            title: 'Restaurant',
+            description: 'Endroits pour manger sur place ou à emporter'
+        },
+        {
+            icon: '🛠️',
+            title: 'Ouvrier',
+            description: 'Travailleurs manuels pour divers travaux'
+        },
+        {
+            icon: '🔧',
+            title: 'Technicien qualifié',
+            description: 'Professionnels techniques pour réparations et installations'
+        },
+        {
+            icon: '🏨',
+            title: 'Hôtel',
+            description: 'Établissements pour l’hébergement temporaire'
+        },
+        {
+            icon: '🏠',
+            title: 'Agence immobilière',
+            description: 'Vente et location de biens immobiliers'
+        },
+        {
+            icon: '🚕',
+            title: 'Taxi',
+            description: 'Services de transport individuel'
+        },
+        {
+            icon: '🧑‍💼',
+            title: 'Agence de recrutement',
+            description: 'Mise en relation entre employeurs et candidats'
+        },
+        {
+            icon: '🎨',
+            title: 'Artisan',
+            description: 'Créateurs et réparateurs manuels de divers objets'
+        },
+        {
+            icon: '🏥',
+            title: 'Clinique',
+            description: 'Centres de soins médicaux et consultations'
+        },
+        {
+            icon: '🛍️',
+            title: 'Centre commercial',
+            description: 'Espaces regroupant plusieurs boutiques et services'
+        },
+        {
+            icon: '🏟️',
+            title: 'Stade',
+            description: 'Infrastructures pour événements sportifs et culturels'
+        },
+        {
+            icon: '🏫',
+            title: 'École',
+            description: 'Établissements d’enseignement pour enfants et adolescents'
+        },
+        {
+            icon: '🎓',
+            title: 'Université',
+            description: 'Enseignement supérieur et recherche'
+        },
+        {
+            icon: '📚',
+            title: 'Librairie',
+            description: 'Vente de livres, fournitures et matériel scolaire'
+        },
+        {
+            icon: '🏦',
+            title: 'Banque',
+            description: 'Services financiers et gestion de comptes'
+        },
+        {
+            icon: '⛽',
+            title: 'Station-service',
+            description: 'Carburant, entretien et services pour véhicules'
+        },
+        {
+            icon: '💇‍♂️',
+            title: 'Salon de coiffure',
+            description: 'Services de coiffure et soins capillaires'
+        },
+        {
+            icon: '📦',
+            title: 'Service de livraison',
+            description: 'Transport et distribution de colis et marchandises'
+        }
+    ];
+
 
 
 }

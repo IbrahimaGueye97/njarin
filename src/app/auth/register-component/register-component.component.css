@@ -91,7 +91,6 @@
   transition: all 0.3s ease;
   box-sizing: border-box;
   outline: none;
-  /*font-family: inherit;*/
 }
 
 .form-input:focus,

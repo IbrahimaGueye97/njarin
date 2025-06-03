@@ -5,48 +5,6 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import {SharedService} from '../../shared/shared.service';
 import {PopupServiceComponent} from "../popup-service/popup-service.component";
 
-export enum Artisans {
-  ELECTRICITES = 'Électriciens certifiés',
-  PLOMBERIES = 'Plombiers d\'urgence',
-  MENUISERIES = 'Menuisiers & charpentiers',
-  MECANIQUES = 'Mécaniciens auto/moto',
-  SECUTITES = 'Serruriers 24h/24',
-  JARDINAGE = 'Jardiniers & paysagistes',
-  AUTRE = 'Couvreurs & étanchéité'
-}
-
-export enum Transports {
-  LOCATION = 'Location de voitures',
-  TAXI = 'Service de taxi/VTC',
-  ACHAT = 'Achat/vente de véhicules',
-  PIECES = 'Pièces détachées auto',
-  CAMIONLOC = 'Location camionnettes',
-  COVOITURAGE = 'Covoiturage',
-  LIVRAISON = 'Livraison express',
-  TRANSPORTMARCANDIS = 'Transport de marchandises'
-}
-
-export enum Immobilier {
-  LOCATION = 'Location maisons/appartements',
-  CHAMBRE = 'Chambres',
-  HOTEL = 'Hôtels & hébergements',
-  TERRAIN = 'Terrains à vendre',
-  BUREAU = 'Bureaux commerciaux',
-  COLOCATION = 'Colocation',
-  GESTIONLOCATIVE = 'Gestion locative',
-  ESTIMATION = 'Estimation immobilière'
-}
-
-export enum ServiceDomicle {
-  NETTOYAGE = 'Ménage & nettoyage',
-  COURSPARTICULIER = 'Cours particuliers',
-  GARDE = 'Garde d\'enfants',
-  SOINS = 'Soins esthétiques',
-  MASSAGE = 'Massage & bien-être',
-  LIVRAISON = 'Livraison de repas',
-  INFORMATIQUE = 'Assistance informatique',
-  PETSETTING = 'Pet-sitting'
-}
 
 @Component({
   selector: 'app-home-component',
@@ -60,49 +18,6 @@ export enum ServiceDomicle {
 export class HomeComponentComponent implements OnInit, OnDestroy {
 
   currentPage: string = 'home';
-
-  artisans: Artisans[] = [
-    Artisans.ELECTRICITES,
-    Artisans.PLOMBERIES,
-    Artisans.MENUISERIES,
-    Artisans.MECANIQUES,
-    Artisans.SECUTITES,
-    Artisans.JARDINAGE,
-    Artisans.AUTRE,
-  ];
-
-  vehicles: Transports[] = [
-    Transports.LOCATION,
-    Transports.TAXI,
-    Transports.ACHAT,
-    Transports.PIECES,
-    Transports.CAMIONLOC,
-    Transports.COVOITURAGE,
-    Transports.LIVRAISON,
-    Transports.TRANSPORTMARCANDIS,
-  ];
-
-  immobiliers: Immobilier[] = [
-    Immobilier.LOCATION,
-    Immobilier.CHAMBRE,
-    Immobilier.HOTEL,
-    Immobilier.TERRAIN,
-    Immobilier.BUREAU,
-    Immobilier.COLOCATION,
-    Immobilier.GESTIONLOCATIVE,
-    Immobilier.ESTIMATION,
-  ];
-
-  serviceDomicile: ServiceDomicle[] = [
-    ServiceDomicle.NETTOYAGE,
-    ServiceDomicle.COURSPARTICULIER,
-    ServiceDomicle.GARDE,
-    ServiceDomicle.SOINS,
-    ServiceDomicle.MASSAGE,
-    ServiceDomicle.LIVRAISON,
-    ServiceDomicle.INFORMATIQUE,
-    ServiceDomicle.PETSETTING,
-  ]
 
   constructor(private readonly router: Router,
               private readonly sharedService: SharedService,) {
@@ -371,15 +286,8 @@ export class HomeComponentComponent implements OnInit, OnDestroy {
     }
   }
 
-  // Dans votre classe component
-  // showPopup = {
-  //   name: '',
-  //   show: false,
-  // }
-
 
   openPopup(value: string) {
-    console.log('======================= ' + value);
     let newState : {name: string, show: boolean};
     switch (value) {
       case 'immobilier':

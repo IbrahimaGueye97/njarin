@@ -38,12 +38,12 @@
             </ng-container>
 
             <ng-container *ngSwitchCase="'Prestataire'">
-                <div class="option-card" *ngFor="let option of prestataire"
-                     (click)="showServicePage('Prestataire', 'hello')"
+                <div class="option-card" *ngFor="let option of prestataireOptions"
+                     (click)="showServicePage('Prestataire', option.title)"
                      (keydown.enter)="showServicePage('Prestataire', '')">
-                    <span class="option-icon">{{option}}</span>
-                    <h4>Choisissez ce que vous faites</h4>
-                    <p>Njarin vous garantie une visibilitee !!!</p>
+                    <span class="option-icon">{{option.icon}}</span>
+                    <h4>{{option.title}}</h4>
+                    <p>{{option.description}}!!!</p>
                 </div>
             </ng-container>
 

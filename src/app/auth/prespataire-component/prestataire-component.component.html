@@ -1,42 +1,110 @@
-<div id="popup" class="popup-overlay" *ngIf="showPopup.show">
+<div id="popup" class="popup-overlay-partenaire" *ngIf="showPopupPres.show">
     <div class="popup-content">
-        <button class="close-btn" (click)="closePopup()">&times;</button>
-        <h3>Choisissez une spécificité</h3>
+        <button class="close-btn" (click)="closePopupPrestation()">&times;</button>
+        <h3>Information supplémentaire</h3>
         <div class="popup-options">
+
+            <form action="" (ngSubmit)="saveInfoPrestataire()" #prestationForm = "ngForm">
 
             <!-- Options pour immobilier -->
                 <div class="option-card">
                     <span class="option-icon"></span>
-<!--                    <h4>Nom de l'entreprise</h4>-->
-                    <label for="code">Nom de l'entreprise</label>
-                    <input type="text" class="form-input">
-                    <label for="code">Type d'entreprise</label>
-                    <select name="selected" id="" class="form-select">
-                        <option value="">Selectionner le type d'entreprise</option>
-                        <option value="">Vente</option>
-                        <option value="">Prestation service</option>
-                        <option value="">Location de voiture</option>
-                    </select>
-<!--                    <h4>Description</h4>-->
 
-                    <label for="code">Description l'entreprise</label>
-                    <input type="text" class="form-input">
-<!--                    <h4>Nombre d'enployer</h4>-->
+                    <div class="form-section">
+                        <h3>Information de l'entreprise</h3>
+                        <label for="code">Nom de l'entreprise *</label>
+                        <input
+                        type="text"
+                        id="name"
+                        name="name"
+                        class="form-input"
+                        placeholder="Nom de l'entreprise"
+                        [(ngModel)]="prestataireData.name"
+                        required
+                        minlength="2"
+                        #name="ngModel">
+                    </div>
 
-                    <label for="code">Nombre d'employer</label>
-                    <select name="selected" id="" class="form-select">
-                        <option value="">Selectionner le nombre d'employer</option>
-                        <option value="">1</option>
-                        <option value="">1 a 5</option>
-                        <option value="">3 a 10</option>
-                        <option value="">10 a 20</option>
-                        <option value="">20 a 50</option>
-                        <option value="">50 a 100</option>
-                        <option value="">Plus de 100</option>
-                    </select>
-<!--                    <h3>Merci de votre confience</h3>-->
-                    <button type="submit" class="btn-register">Evoyer</button>
+                    <div class="form-section" *ngIf="sharedService.sowType">
+                        <label for="code">Type d'entreprise</label>
+                        <select
+                        name="selected"
+                        id="type"
+                        class="form-select"
+                        [(ngModel)]="prestataireData.type">
+                            <option value="">Selectionner le type d'entreprise</option>
+                            <option value=""
+                            *ngFor="let type of sharedService.types">
+                                {{type.icon}} {{type.title}}
+                            </option>
+                        </select>
+                    </div>
+
+                    <div class="form-section">
+                        <label for="code">Description l'entreprise</label>
+                        <input
+                        type="text"
+                        id="description"
+                        name="description"
+                        class="form-input"
+                        placeholder="Description de l'entrepise"
+                        [(ngModel)]="prestataireData.description"
+                        required
+                        minlength="2"
+                        #description = "ngModel">
+                    </div>
+
+                    <div class="form-section">
+                        <label for="code">Nombre d'employer</label>
+                        <select
+                        name="selected"
+                        id="nbrEmployer"
+                        class="form-select"
+                        [(ngModel)]="prestataireData.numberEmployer">
+                            <option value="">Selectionner le nombre d'employer</option>
+                            <option value="1">1</option>
+                            <option value="5">1 a 5</option>
+                            <option value="10">5 a 10</option>
+                            <option value="20">10 a 20</option>
+                            <option value="50">20 a 50</option>
+                            <option value="100">50 a 100</option>
+                            <option value="+100">Plus de 100</option>
+                        </select>
+                    </div>
+
+                    <!-- Conditions -->
+                    <div class="form-section">
+                        <div class="form-group checkbox-group">
+                            <label class="checkbox-label">
+                                <input
+                                        type="checkbox"
+                                        name="acceptTerms"
+                                        [(ngModel)]="prestataireData.acceptTerms"
+                                        required
+                                        #acceptTerms="ngModel"
+                                        class="form-checkbox">
+                                <span class="checkmark"></span>
+                                J'accepte les <a href="#" (click)="openTerms($event)">conditions d'utilisation</a> et la <a href="#" (click)="openPrivacy($event)">politique de confidentialité</a> *
+                            </label>
+                            <div class="error-message" *ngIf="acceptTerms.invalid && acceptTerms.touched">
+                                Vous devez accepter les conditions d'utilisation
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="form-actions">
+                        <button
+                        type="submit"
+                        class="btn-prestataire"
+                        [disabled]="prestationForm.invalid">
+                            Envoyer
+                        </button>
+                    </div>
+
                 </div>
+
+            </form>
 
         </div>
     </div>
